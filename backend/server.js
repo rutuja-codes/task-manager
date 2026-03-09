@@ -14,7 +14,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: [
+    'http://localhost:4200',
+    'https://task-manager-orcin-chi-78.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
