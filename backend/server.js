@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -50,7 +46,10 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: [
+      'http://localhost:4200',
+      'https://task-manager-orcin-chi-78.vercel.app'
+    ],
     methods: ['GET', 'POST']
   }
 });
