@@ -63,7 +63,7 @@ import * as AuthActions from '../../../store/auth/auth.actions';
           </p>
         </div>
 
-        <!-- Submit -->
+        <!-- Submit Button -->
         <button
           type="submit"
           [disabled]="loading$ | async"
@@ -72,6 +72,16 @@ import * as AuthActions from '../../../store/auth/auth.actions';
                  rounded-lg px-4 py-3 transition-colors">
           <span *ngIf="!(loading$ | async)">Sign In</span>
           <span *ngIf="loading$ | async">Signing in...</span>
+        </button>
+
+        <!-- Try Demo Button -->
+        <button
+          type="button"
+          (click)="fillDemo()"
+          class="w-full mt-3 border border-primary-500 text-primary-400
+                 hover:bg-primary-500/10 font-medium rounded-lg px-4 py-3
+                 transition-colors text-sm">
+          🚀 Try Demo Account
         </button>
 
       </form>
@@ -95,7 +105,6 @@ export class LoginComponent {
     private fb: FormBuilder,
     private store: Store
   ) {
-    // ✅ Inside constructor — store is initialized!
     this.loading$ = this.store.select(state => (state as any).auth.loading);
     this.error$ = this.store.select(state => (state as any).auth.error);
 
@@ -112,5 +121,13 @@ export class LoginComponent {
     } else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  // fills demo credentials automatically!
+  fillDemo() {
+    this.loginForm.patchValue({
+      email: 'demo@taskflow.com',
+      password: 'demo1234'
+    });
   }
 }
